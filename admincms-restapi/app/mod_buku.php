@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class mod_buku extends Model
 {
-    protected $table = 'ms_admin';
-    protected $fillable = ['code_perusahaan', 'username', 'password','keyhash', 'email', 'nama', 'no_telp', 'code_jabatan', 'kodeAdminTrx', 'created_at', 'updated_at' ];
+    protected $table = 'ms_barang';
+    protected $fillable = ['id', 'barcode', 'berat','kategori','status', 'judul_buku', 'harga', 'halaman', 'ukuran', 'cover', 'penulis', 'isbn', 'penerbit', 'tahun', 'diskripsi', 'gambar_buku', 'store' ];
 
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class mod_manage_product extends Model
 {
-    protected $table = 'ms_admin';
-    protected $fillable = ['code_perusahaan', 'username', 'password','keyhash', 'email', 'nama', 'no_telp', 'code_jabatan', 'kodeAdminTrx', 'created_at', 'updated_at' ];
+    protected $table = 'ms_top_produk';
+    protected $fillable = ['id_buku', 'judul_buku', 'kategori','typePO', 'harga_buku', 'harga_jadi', 'gambar_buku' ];
 
 }

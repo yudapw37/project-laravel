@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class mod_customer extends Model
 {
-    protected $table = 'ms_admin';
-    protected $fillable = ['code_perusahaan', 'username', 'password','keyhash', 'email', 'nama', 'no_telp', 'code_jabatan', 'kodeAdminTrx', 'created_at', 'updated_at' ];
-
+    protected $table = 'ms_customer'; 
+    protected $fillable = ['username', 'userId','password',
+    'nama', 'alamat', 'telephone', 'kodeAdminTrx',
+     'jenis_reseller', 'diskon', 'keyhash', 'email'];
+   
 }

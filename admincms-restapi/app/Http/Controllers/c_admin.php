@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 use DB;
 class c_admin extends Controller
 {
+    public function validasi($req){
+        if(strlen($req) > 12){
+            return 'error';
+        }else{
+            return $req;
+        }
+    }
     public function getAdmin (Request $request){
         $limit = 10;
         $offset = 0;
@@ -16,14 +23,16 @@ class c_admin extends Controller
             }
             else{
                $offset = ($getOffset-1)*10; 
-            }
-            
+            }            
         }
-        $name = $request->name;
+        $name = $this->validasi($request->name);
         $result = [];
         try {
-            // var_dump(strlen($name));
-            if(strlen($name) <= 12){
+            if( $name == 'error'){
+                $stat = ['code'=>'401', 'description'=>'too much variable'];
+                $data = ['status'=>$stat, 'result'=>'error'];
+                return response()->json(['success'=>false, 'data'=>$data], 401);
+            }else{    
                 $getAdmin = 
                         DB::table('ms_admin')
                         ->select('ms_admin.id as idUser', 'ms_admin.username', 'ms_admin.kodeAdminTrx', 'ms_admin.nama as nama', 'ms_admin.code_jabatan as code_jabatan', 'ms_jabatan.jabatan', 'ms_admin.no_telp', 'ms_admin.code_perusahaan as code_lokasi', 'ms_perusahaan.nama as lokasi')
@@ -36,17 +45,13 @@ class c_admin extends Controller
                         ->get();
                         
                 if(count($getAdmin)!=0){
-                return response()->json(['success'=>true, 'data'=>$getAdmin], 200);  
+                    return response()->json(['success'=>true, 'data'=>$getAdmin], 200);  
                 }
                 else{
                     $stat = ['code'=>'401', 'description'=>'doesnt match data'];
                     $data = ['status'=>$stat, 'result'=>'null'];
                     return response()->json(['success'=>false, 'data'=>$data], 401); 
-                } 
-            }else{
-                $stat = ['code'=>'401', 'description'=>'too much variable'];
-                $data = ['status'=>$stat, 'result'=>'error'];
-                return response()->json(['success'=>false, 'data'=>$data], 401);
+                }
             }
                         
         } catch (\Exception $ex) {
